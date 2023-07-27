@@ -8,9 +8,14 @@ export class DeckOfCards {
     constructor(config) {
         this.config = this.createConfig(config);
 
+        const names = [];
+
         Object.values(CARD_SUITS).forEach(suit => {
             this[suit] = this.createDeck(suit);
+            names.push(suit);
         });
+
+        this.names = names;
     }
 
     createConfig(config = {}) {
@@ -50,5 +55,13 @@ export class DeckOfCards {
 
     createCard(name, value, suit) {
         return new Card(name, value, suit);
+    }
+
+    getAllCard() {
+        return this.names.map(name => this.getAllSuitsCard(name)).flat();
+    }
+
+    getAllSuitsCard(suit) {
+        return this[suit].cards;
     }
 }
