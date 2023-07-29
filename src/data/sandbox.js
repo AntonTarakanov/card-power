@@ -1,5 +1,5 @@
-import { DeckAPI } from './DeckAPI';
-import { DataAPI } from './DataAPI';
+import { DeckAPI } from './components/DeckAPI';
+import { CardDataAPI } from './CardDataAPI';
 
 export const runSandboxDeckAPI = () => {
     const instance = new DeckAPI();
@@ -8,7 +8,7 @@ export const runSandboxDeckAPI = () => {
 };
 
 export const runSandboxDataAPI = () => {
-    const instance = new DataAPI();
+    const instance = new CardDataAPI();
 
     console.log('runSandboxDataAPI. Instance', instance);
 };

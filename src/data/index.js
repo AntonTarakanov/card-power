@@ -1,1 +1,1 @@
-export { DataAPI } from './DataAPI';
+export { CardDataAPI } from './CardDataAPI';

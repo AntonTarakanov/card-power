@@ -54,7 +54,7 @@ export class DeckOfCards {
     }
 
     createCard(name, value, suit) {
-        return new Card(name, value, suit);
+        return new Card({ name, value, suit });
     }
 
     getAllCard() {
