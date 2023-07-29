@@ -23,14 +23,28 @@ export class PioneerDataHelper {
      * Определение минимально необходимых данных.
      */
     initData() {
-        this.state = new PioneerState();
+        this.initDataState();
+        this.initDataMatrix();
+        this.initDataAdditional();
+    }
 
-        this.matrix = new PioneerMatrix({
+    initDataState() {
+        this.state = new PioneerState();
+    }
+
+    initDataMatrix() {
+        this.matrix = this.createDataMatrix();
+
+        this.matrix.initMatrix();
+    }
+
+    initDataAdditional() {}
+
+    createDataMatrix() {
+        return new PioneerMatrix({
             MAX_X: this.config.MAP_SIZE_X,
             MAX_Y: this.config.MAP_SIZE_Y,
         });
-
-        this.matrix.initMatrix()
     }
 
     setState(property, value) {

@@ -1,0 +1,88 @@
+/* Таблица используемых цветов */
+
+/* #282E33 - светлый фон для тёмной темы */
+/* #272822 - monokai фон */
+/* #18191D - Тёмный фон */
+/* #65AADD - синий цвет */
+/* #F92672 - monokai розовй */
+/* #A6E22E - monokai зелёный */
+/* #F8F8F0 - monokai белый */
+/* #00CC99 - приятный зелёный */
+/* #FF0066 - розовый 2 */
+/* #FF9999 - розовая тень / акцент */
+
+body {
+    background: #18191D;
+}
+
+.application {
+    justify-content: center;
+}
+
+.header {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    color: #F8F8F0;
+}
+
+.header_img {
+    height: 50px;
+    margin: 10px;
+}
+
+.cell {
+    min-height: 35px;
+    min-width: 35px;
+    height: 35px;
+    width: 35px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cell_row {
+    width: 100%;
+    height: 100%;
+}
+
+.cell_green { background: #A6E22E; }
+.cell_red { background: darkred; }
+.cell_magenta { background: #F92672; }
+.cell_blue { background: #65AADD; }
+
+.log_button {
+    height: 20px;
+    width: 160px;
+    background: #18191D;
+    padding: 10px;
+}
+
+/* COMMON START: */
+.justifyCenter,
+.flexColumn,
+.flex {
+    display: flex;
+}
+
+.flexColumn {
+    flex-direction: column;
+}
+
+.justifySpaceBetween {
+    justify-content: space-between;
+}
+
+.cell_wrap,
+.justifyCenter {
+    justify-content: center;
+}
+
+/* COMMON END. */
+
+/* ВРЕМЕННЫЕ КОСТЫЛИ */
+
+.marginLeftMiddle {
+    margin-left: 25px;
+}

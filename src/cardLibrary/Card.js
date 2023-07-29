@@ -1,10 +1,16 @@
+import { PioneerInfo } from '../library';
+
 /**
  * Базовый компонент карты.
  */
-export class Card {
-    constructor(name, value, suits) {
-        this.name = name;
-        this.value = value;
-        this.suits = suits;
+export class Card extends PioneerInfo {
+    constructor() {
+        super(FIELDS, null);
     }
+}
+
+const FIELDS = {
+    NAME: 'name',
+    VALUE: 'value',
+    SUITS: 'suits',
 }

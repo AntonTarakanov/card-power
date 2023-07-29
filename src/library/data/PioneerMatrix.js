@@ -96,13 +96,17 @@ export class PioneerMatrix extends Array {
             let rowResult = [];
 
             for (let j = 0; j < this.MAX_X; j++) {
-                rowResult.push({ x: j, y: i });
+                rowResult.push(this.createMatrixItem(j, i));
             }
 
             result.push(rowResult);
         }
 
         return result;
+    }
+
+    createMatrixItem(x, y) {
+        return { x, y };
     }
 
     /**
