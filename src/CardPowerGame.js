@@ -1,4 +1,5 @@
 import { CardDataAPI } from './data';
+import { CardRenderAPI } from './render';
 
 /**
  * Игра CardPower.
@@ -12,8 +13,11 @@ export default class CardPowerGameApp {
         };
 
         this.cardDataAPI = new CardDataAPI(this.dataHandler, configForDataAPI, true);
+        this.cardRenderAPI = new CardRenderAPI(this.dataHandler, {}, true);
 
         const matrix = this.cardDataAPI.getMatrix();
+
+        this.cardRenderAPI.initRender(matrix);
     }
 
     start() {}

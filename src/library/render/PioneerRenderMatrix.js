@@ -79,6 +79,8 @@ export class PioneerRenderMatrix extends PioneerRenderApp {
         row.forEach(item => {
             const tile = this.buildDivTileNode(item);
 
+            tile.className = 'tile';
+
             rowElement.appendChild(tile);
         });
 
@@ -93,7 +95,7 @@ export class PioneerRenderMatrix extends PioneerRenderApp {
         const node = this.getDiv();
 
         node.addEventListener('click', tileHandler);
-        node.textContent = `|${Object.values(item).join('-')}|`;
+        node.textContent = Object.values(item).join('-');
 
         this.setAttributeInTile(node, item);
 
