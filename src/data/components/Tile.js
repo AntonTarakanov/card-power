@@ -12,6 +12,17 @@ export class Tile extends Card {
         this[FIELDS.IS_SHOW] = false;
         this[FIELDS.POSITION] = { ...position };
     }
+
+    /**
+     * @param {object} keyValueObj
+     */
+    setValues(keyValueObj) {
+        Object.keys(keyValueObj).forEach(key => {
+            if (key !== FIELDS.POSITION) {
+                this[key] = keyValueObj[key];
+            }
+        });
+    }
 }
 
 const FIELDS = {
