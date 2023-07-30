@@ -1,11 +1,58 @@
 import { PioneerMatrix } from '../../library';
 
 import { Tile } from './Tile';
+import {MATRIX_TEXT} from "../../library/data/constants";
 
+/**
+ * Данные в виде матрицы.
+ *
+ * Заменяем "matrixItem".
+ * Функционал добавления строки при необходимости.
+ */
 export class CardMatrix extends PioneerMatrix {
     createMatrixItem(x, y) {
         const result = super.createMatrixItem(x, y);
 
         return new Tile(result);
+    }
+
+    getItem({ x, y }) {
+        if (!this.checkPositionLimits({ x, y })) {
+            console.log(MATRIX_TEXT.POSITION_LIMIT_ERROR);
+
+            return null;
+        }
+
+        const row = this[y];
+
+        if (!row) {
+            this.addAdditionalRow(y);
+        }
+
+        return this[y][x];
+    }
+
+    /**
+     * Для "CardMatrix" можем выходить за пределы "y".
+     * При выходе за пределы "y" - добавляем ряд.
+     */
+    checkPositionLimits({ x, y }) {
+        const isErrorX = !CardMatrix.checkPositionLimitMethod(x, this.MAX_X);
+        const isErrorY = !CardMatrix.checkPositionLimitMethod(y, this.MAX_Y);
+        let result = true;
+
+        if (isErrorX) {
+            result = false;
+        }
+
+        /*if (isErrorY) {
+            console.log('Необходимо предусмотреть добавление новой строки matrix.');
+        }*/
+
+        return result;
+    }
+
+    addAdditionalRow(i) {
+        this[i] = this.createEmptyMatrixRow(i);
     }
 }

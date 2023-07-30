@@ -93,16 +93,20 @@ export class PioneerMatrix extends Array {
         }
 
         for (let i = 0; i < this.MAX_Y; i++) {
-            let rowResult = [];
-
-            for (let j = 0; j < this.MAX_X; j++) {
-                rowResult.push(this.createMatrixItem(j, i));
-            }
-
-            result.push(rowResult);
+            result.push(this.createEmptyMatrixRow(i));
         }
 
         return result;
+    }
+
+    createEmptyMatrixRow(i) {
+        const rowResult = [];
+
+        for (let j = 0; j < this.MAX_X; j++) {
+            rowResult.push(this.createMatrixItem(j, i));
+        }
+
+        return rowResult;
     }
 
     createMatrixItem(x, y) {
@@ -113,7 +117,7 @@ export class PioneerMatrix extends Array {
      * Проверка соответствию границы матрицы.
      */
     checkPositionLimits({ x, y }) {
-        const limitsMethod = (value, maxLimit) => value >= 0 && value <= maxLimit;
+        const limitsMethod = PioneerMatrix.checkPositionLimitMethod;
 
         return limitsMethod(x, this.MAX_X) && limitsMethod(y, this.MAX_Y);
     }
@@ -128,5 +132,9 @@ export class PioneerMatrix extends Array {
             ...defaultConfig,
             ...config,
         };
+    }
+
+    static checkPositionLimitMethod(value, maxLimit) {
+        return value >= 0 && value <= maxLimit
     }
 }

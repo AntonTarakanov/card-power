@@ -10,6 +10,8 @@ export default class CardPowerGameApp {
             NUMBER_CARDS_ON_TABLE: config.NUMBER_CARDS_ON_TABLE,
             NUMBER_COLUMN_ON_TABLE: config.NUMBER_COLUMN_ON_TABLE,
             NUMBER_ROW_ON_TABLE: config.NUMBER_ROW_ON_TABLE,
+            MAP_SIZE_X: config.matrixSize.x,
+            MAP_SIZE_Y: config.matrixSize.y,
         };
 
         this.cardDataAPI = new CardDataAPI(this.dataHandler, configForDataAPI, true);

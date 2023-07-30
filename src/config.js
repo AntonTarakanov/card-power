@@ -3,7 +3,7 @@ import { HARD_LEVELS } from './constants';
 export const config = {
     matrixSize: {
         x: 10,
-        y: 20,
+        y: 1,
     },
     APP_NAME: 'cardPower',
     isDev: true,
