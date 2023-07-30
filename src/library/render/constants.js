@@ -8,7 +8,13 @@ export const COMMON_CLASS_NAMES = {
     HEADER: 'header',
     HEADER_IMG: 'header_img',
 
+    TILE: 'tile',
+
     MARGIN_LEFT_MIDDLE: 'marginLeftMiddle',
+}
+
+export const COLORS_CLASS = {
+    WHEAT: 'color_wheat',
 }
 
 export const COMMON_DOM_IDS = {

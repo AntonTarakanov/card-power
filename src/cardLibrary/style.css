@@ -1,0 +1,54 @@
+.cardLib_color_clubs { color: #65AADD }
+.cardLib_color_diamonds { color: #00CC99 }
+.cardLib_color_hearts { color: #F92672 }
+.cardLib_color_spades { color: #F8F8F0 }
+
+.cardLib_tile_wrapCut,
+.cardLib_tile_wrapFull {
+    /*border: solid #32a1ce;*/
+    background: #282E33;
+    /* #282E33 - светлый фон для тёмной темы */
+
+    /* #65AADD - синий цвет */
+    /* #F92672 - monokai розовй */ /* #FF0066 - розовый 2 */
+    /* #F8F8F0 - monokai белый */
+    /* #00CC99 - приятный зелёный */
+    margin: 2px 6px;
+}
+
+.cardLib_tile_wrapFull {
+
+}
+
+.cardLib_tile_wrapCut {
+    width: 100px;
+    height: 25px;
+}
+
+.cardLib_tile_shirt {
+
+}
+
+.cardLib_tile_value {
+
+}
+
+/* ♣️Трефы. */
+.cardLib_suit_clubs {
+
+}
+
+/* ♦️Бубны */
+.cardLib_suit_diamonds {
+
+}
+
+/* ♥️Червы */
+.cardLib_suit_hearts {
+
+}
+
+/* ♠️ Пики */
+.cardLib_suit_spades {
+
+}

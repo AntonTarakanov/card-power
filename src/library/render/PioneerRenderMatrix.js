@@ -1,5 +1,5 @@
 import { PioneerRenderApp } from './PioneerRenderApp';
-import { COMMON_CLASS_NAMES, ATTRIBUTE_ORDER } from './constants';
+import { COMMON_CLASS_NAMES, ATTRIBUTE_ORDER, COLORS_CLASS } from './constants';
 
 /**
  * Добавляет к RenderPioneerApp рендер рабочей зоны по переданной matrix.
@@ -76,15 +76,17 @@ export class PioneerRenderMatrix extends PioneerRenderApp {
         rowElement.setAttribute(ATTRIBUTE_ORDER, index);
         rowElement.className = COMMON_CLASS_NAMES.FLEX;
 
-        row.forEach(item => {
-            const tile = this.buildDivTileNode(item);
-
-            tile.className = 'tile';
-
-            rowElement.appendChild(tile);
-        });
+        row.forEach(item => rowElement.appendChild(this.buildWrapTileNode(item)));
 
         return rowElement;
+    }
+
+    buildWrapTileNode(item) {
+        const tileWrap = this.buildDivTileNode(item);
+
+        tileWrap.className = `${COMMON_CLASS_NAMES.TILE} ${COLORS_CLASS.WHEAT}`;
+
+        return tileWrap;
     }
 
     buildDivTileNode(item) {

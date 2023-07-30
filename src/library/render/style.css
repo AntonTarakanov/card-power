@@ -11,6 +11,8 @@
 /* #FF0066 - розовый 2 */
 /* #FF9999 - розовая тень / акцент */
 
+/* wheat - */
+
 body {
     background: #18191D;
 }
@@ -52,6 +54,8 @@ body {
 .cell_red { background: darkred; }
 .cell_magenta { background: #F92672; }
 .cell_blue { background: #65AADD; }
+
+.color_wheat { color: wheat; }
 
 .log_button {
     height: 20px;

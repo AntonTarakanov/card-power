@@ -2,7 +2,7 @@ export const CARD_SUITS = {
     CLUBS: 'clubs',         // ♣️Трефы.
     DIAMONDS: 'diamonds',   // ♦️Бубны — diamonds.
     HEARTS: 'hearts',       // ♥️Червы — hearts.
-    SPADES: 'spades',       // ♠️ Пики — spades.
+    SPADES: 'spades',       // ♠️Пики — spades.
 };
 
 export const NON_STANDARD_CARDS = {
