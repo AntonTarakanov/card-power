@@ -13,10 +13,17 @@ export class CardRenderHelper extends PioneerRenderMatrix {
     }
 
     buildDivTileNode(item) {
+        const onClickHandler = this.handler;
+        const tileHandler = function(event) {
+            return onClickHandler(event, this);
+        }
+
         const wrap = this.getEmptyDiv();
         const cardTile = new TileRender();
 
         const viewType = item.value === null ? CARD_VIEW_TYPE.CUT_EMPTY : CARD_VIEW_TYPE.CUT;
+
+        wrap.addEventListener('click', tileHandler);
 
         if (item.value !== null) {
             cardTile.initNode(wrap, item, viewType);

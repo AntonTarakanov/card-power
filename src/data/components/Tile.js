@@ -11,6 +11,7 @@ export class Tile extends Card {
     initTileInfo(position) {
         this[FIELDS.IS_SHOW] = false;
         this[FIELDS.POSITION] = { ...position };
+        this[FIELDS.IS_SELECTED] = false;
     }
 
     /**
@@ -28,4 +29,5 @@ export class Tile extends Card {
 const FIELDS = {
     IS_SHOW: 'isShow',
     POSITION: 'position',
+    IS_SELECTED: 'isSelected',
 }
