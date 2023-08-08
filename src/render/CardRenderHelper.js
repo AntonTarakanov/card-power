@@ -24,6 +24,7 @@ export class CardRenderHelper extends PioneerRenderMatrix {
         const viewType = item.value === null ? CARD_VIEW_TYPE.CUT_EMPTY : CARD_VIEW_TYPE.CUT;
 
         wrap.addEventListener('click', tileHandler);
+        this.setAttributeInTile(wrap, item);
 
         if (item.value !== null) {
             cardTile.initNode(wrap, item, viewType);

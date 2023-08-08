@@ -1,9 +1,9 @@
-import CardPowerGameApp from './CardPowerGame';
+import CardPowerGameAPI from './CardPowerGameAPI';
 
 import { config } from './config';
 
 function createApp() {
-    const cardPower = new CardPowerGameApp(config);
+    const cardPower = new CardPowerGameAPI(config);
 
     cardPower.start();
 }

@@ -161,8 +161,8 @@ export class PioneerRenderMatrix extends PioneerRenderApp {
         const attrDataset = node.dataset;
 
         return {
-            x: Number(attrDataset.x),
-            y: Number(attrDataset.y),
+            x: Number(attrDataset.positionX),
+            y: Number(attrDataset.positionY),
         };
     }
 }

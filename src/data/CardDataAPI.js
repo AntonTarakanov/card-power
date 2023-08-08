@@ -13,4 +13,12 @@ export class CardDataAPI extends CardDataHelper {
     getMatrix() {
         return this.matrix;
     }
+
+    getStateStage() {
+        return this.state.getStage();
+    }
+
+    setStateStage(stage) {
+        this.state.setStage(stage);
+    }
 }

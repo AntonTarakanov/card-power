@@ -3,6 +3,7 @@ import { PioneerDataHelper } from '../library';
 import { DeckAPI } from './components/DeckAPI';
 import { HistoryData } from './components/HistoryData';
 import { CardMatrix } from './components/CardMatrix';
+import { CardState } from './components/CardState';
 
 /**
  * Аккумулирует логику matrix и card.
@@ -15,7 +16,7 @@ import { CardMatrix } from './components/CardMatrix';
 export class CardDataHelper extends PioneerDataHelper {
 
     initDataState() {
-        super.initDataState();
+        this.state = new CardState();
     }
 
     initDataAdditional() {

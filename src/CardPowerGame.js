@@ -1,10 +1,10 @@
-import { CardDataAPI } from './data';
+import { CardDataAPI, STATE_STAGE } from './data';
 import { CardRenderAPI } from './render';
 
 /**
  * Игра CardPower.
  */
-export default class CardPowerGameApp {
+export class CardPowerGameApp {
     constructor(config) {
         const configForDataAPI = {
             NUMBER_CARDS_ON_TABLE: config.NUMBER_CARDS_ON_TABLE,
@@ -14,8 +14,8 @@ export default class CardPowerGameApp {
             MAP_SIZE_Y: config.matrixSize.y,
         };
 
-        this.cardDataAPI = new CardDataAPI(this.dataHandler, configForDataAPI, true);
-        this.cardRenderAPI = new CardRenderAPI(this.dataHandler, {}, true);
+        this.cardDataAPI = new CardDataAPI(this.dataHandler.bind(this), configForDataAPI, true);
+        this.cardRenderAPI = new CardRenderAPI(this.domHandler.bind(this), {}, true);
 
         const matrix = this.cardDataAPI.getMatrix();
 
