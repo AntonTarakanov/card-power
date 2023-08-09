@@ -13,7 +13,7 @@ export class PioneerRenderApp extends PioneerRender {
     /**
      * DOM_IDS - объект с id.
      */
-    constructor(DOM_IDS) {
+    constructor(DOM_IDS, isDev) {
         super();
 
         this.initDomIds(DOM_IDS);
@@ -21,6 +21,13 @@ export class PioneerRenderApp extends PioneerRender {
         this.headerInstance = this.getHeaderInstance();
         this.additionalFieldInstance = this.getAdditionalFieldInstance();
         this.appFieldInstance = this.getAppFieldInstance();
+
+        this.isDev = isDev;
+
+        if (this.isDev) {
+            window.PioneerRenderApp = this;
+            console.log('PioneerRenderApp', this);
+        }
     }
 
     initRender() {
@@ -60,10 +67,15 @@ export class PioneerRenderApp extends PioneerRender {
      */
     getAppFieldInstance() {
         const appFieldInstance = new PioneerRender();
-        const mainId = this.DOM_IDS.MAIN;
+
+        appFieldInstance.MAIN_ID = this.DOM_IDS.MAIN;
 
         appFieldInstance.buildNode = function() {
-            return this.getDiv(COMMON_CLASS_NAMES.FLEX, mainId);
+            return this.getDiv(COMMON_CLASS_NAMES.FLEX, this.MAIN_ID);
+        }
+
+        appFieldInstance.getNode = function() {
+            return this.getElementById(this.MAIN_ID);
         }
 
         return appFieldInstance;

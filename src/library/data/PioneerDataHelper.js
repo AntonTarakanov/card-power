@@ -16,6 +16,11 @@ export class PioneerDataHelper {
         this.config = new ConfigHelper(this.createConfig(config));
         this.isDev = isDev;
 
+        if (this.isDev) {
+            window.PioneerDataHelper = this;
+            console.log('PioneerDataHelper', this);
+        }
+
         this.initData();
     }
 
@@ -106,7 +111,9 @@ export class PioneerDataHelper {
      * @param {object} position - { x, y } .
      */
     useHandler(position) {
-        this.useHandlerWithCustom(BASE_HANDLER_TYPES.ELEMENT_CHANGED, position);
+        this.useHandlerWithCustom(BASE_HANDLER_TYPES.ELEMENT_CHANGED, {
+            position,
+        });
     }
 
     /**

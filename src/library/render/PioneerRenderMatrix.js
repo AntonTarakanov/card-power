@@ -6,19 +6,35 @@ import { COMMON_CLASS_NAMES, ATTRIBUTE_ORDER, COLORS_CLASS } from './constants';
  */
 export class PioneerRenderMatrix extends PioneerRenderApp {
     constructor(handler, config = {}, isDev) {
-        super(config.DOM_IDS || {});
+        super(config.DOM_IDS || {}, isDev);
 
         this.USE_TABLE = config.USE_TABLE;
         this.handler = handler;
-        this.isDev = isDev;
     }
 
     initRender(matrix) {
-        const appForm = this.getAppFormNode();
-
-        document.body.appendChild(appForm);
+        super.initRender();
 
         this.createMatrix(matrix);
+    }
+
+    /**
+     * TODO: вынести в отдельный класс.
+     *
+     * Переопределение заглушки с доп. методами работы с матрицей.
+     */
+    getAppFieldInstance() {
+        const appFieldInstance = super.getAppFieldInstance();
+
+        appFieldInstance.rerenderNode = function() {
+            console.log('Не реализовано');
+        }
+
+        appFieldInstance.rerenderMatrixTile = function() {
+            console.log('Не реализовано');
+        }
+
+        return appFieldInstance;
     }
 
     createMatrix(matrix) {
