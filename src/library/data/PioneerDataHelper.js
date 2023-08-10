@@ -111,9 +111,9 @@ export class PioneerDataHelper {
      * @param {object} position - { x, y } .
      */
     useHandler(position) {
-        this.useHandlerWithCustom(BASE_HANDLER_TYPES.ELEMENT_CHANGED, {
-            position,
-        });
+        const tile = this.getItemByPosition(position);
+
+        this.useHandlerWithCustom(BASE_HANDLER_TYPES.ELEMENT_CHANGED, { tile, position });
     }
 
     /**

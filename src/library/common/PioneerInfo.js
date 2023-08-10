@@ -18,4 +18,10 @@ export class PioneerInfo {
     setValue(field, value) {
         this[field] = value;
     }
+
+    setValueByEntries(entriesList) {
+        entriesList.forEach(keyValue => {
+            this.setValue(keyValue[0], keyValue[1]);
+        });
+    }
 }

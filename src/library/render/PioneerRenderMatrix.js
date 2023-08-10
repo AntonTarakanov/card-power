@@ -30,8 +30,12 @@ export class PioneerRenderMatrix extends PioneerRenderApp {
             console.log('Не реализовано');
         }
 
-        appFieldInstance.rerenderMatrixTile = function() {
-            console.log('Не реализовано');
+        appFieldInstance.rerenderMatrixTile = function(node, { x, y }) {
+            const rootNode = this.getNode();
+            const wrapNode = rootNode.firstChild;
+            const oldNode = wrapNode.childNodes[y].childNodes[x];
+
+            wrapNode.childNodes[y].replaceChild(node, oldNode);
         }
 
         return appFieldInstance;
@@ -167,6 +171,12 @@ export class PioneerRenderMatrix extends PioneerRenderApp {
 
     buildTableTileContentNode() {
         return this.getDiv();
+    }
+
+    rerenderTile({ tile, position }) {
+        const node = this.buildWrapTileNode(tile);
+
+        this.appFieldInstance.rerenderMatrixTile(node, position);
     }
 
     static getPositionFromNode(node) {

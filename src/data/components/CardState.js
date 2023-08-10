@@ -12,6 +12,8 @@ export class CardState extends PioneerState {
 
     initStateInfo() {
         this[FIELDS.STAGE] = null;
+        this[FIELDS.COUNTER] = null;
+        this[FIELDS.SELECTED_CARD] = null;
     }
 
     getStage() {
@@ -21,11 +23,16 @@ export class CardState extends PioneerState {
     setStage(stage) {
         this.setState(FIELDS.STAGE, stage);
     }
+
+    setSelectedCard(position) {
+        this.setState(FIELDS.SELECTED_CARD, position);
+    }
 }
 
 export const FIELDS = {
-    STAGE: 'stage',         // Этап игры.
-    COUNTER: 'counter',     // Счётчки очков.
+    STAGE: 'stage',                 // Этап игры.
+    COUNTER: 'counter',             // Счётчки очков.
+    SELECTED_CARD: 'selectedCard',  // Координаты выбранной карты.
 }
 
 export const STAGES = {

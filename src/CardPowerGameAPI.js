@@ -5,6 +5,6 @@ import { CardPowerGameApp } from './CardPowerGame';
  */
 export default class CardPowerGameAPI extends CardPowerGameApp {
     start() {
-        super.start();
+        this.doStart();
     }
 }

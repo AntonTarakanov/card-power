@@ -20,13 +20,13 @@ export class Tile extends Card {
     setValues(keyValueObj) {
         Object.keys(keyValueObj).forEach(key => {
             if (key !== FIELDS.POSITION) {
-                this[key] = keyValueObj[key];
+                this.setValue(key, keyValueObj[key]);
             }
         });
     }
 }
 
-const FIELDS = {
+export const FIELDS = {
     IS_SHOW: 'isShow',
     POSITION: 'position',
     IS_SELECTED: 'isSelected',

@@ -1,3 +1,4 @@
+import { PioneerInfo } from '../common';
 import { MATRIX_TEXT } from './constants';
 
 /**
@@ -110,7 +111,12 @@ export class PioneerMatrix extends Array {
     }
 
     createMatrixItem(x, y) {
-        return { x, y };
+        const TILE_FIELDS = { X: 'x', Y: 'y' };
+        const tile = new PioneerInfo(TILE_FIELDS, null);
+
+        tile.setValueByEntries([ [TILE_FIELDS.X, x], [TILE_FIELDS.Y, y] ]);
+
+        return tile;
     }
 
     /**
@@ -132,6 +138,18 @@ export class PioneerMatrix extends Array {
             ...defaultConfig,
             ...config,
         };
+    }
+
+    changeTileByEntries(position, entriesList) {
+        const tile = this.getItem(position);
+
+        tile.setValueByEntries(entriesList);
+    }
+
+    changeTile(position, field, value) {
+        const tile = this.getItem(position);
+
+        tile.setValue(field, value);
     }
 
     static checkPositionLimitMethod(value, maxLimit) {

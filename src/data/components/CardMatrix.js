@@ -12,9 +12,7 @@ import { Tile } from './Tile';
  */
 export class CardMatrix extends PioneerMatrix {
     createMatrixItem(x, y) {
-        const result = super.createMatrixItem(x, y);
-
-        return new Tile(result);
+        return new Tile({ x, y });
     }
 
     getItem({ x, y }) {
