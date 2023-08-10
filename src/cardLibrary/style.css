@@ -33,6 +33,11 @@
 
 }
 
+.cardLib_tile_selected {
+    box-shadow: 0 0 10px 5px #FF0066;
+}
+
+
 /* ♣️Трефы. */
 .cardLib_suit_clubs {
 

@@ -4,10 +4,14 @@ import { CARD_VIEW_TYPE } from '../cardLibrary/render/constants';
 import { TileRender } from './components/Tile';
 
 export class CardRenderHelper extends PioneerRenderMatrix {
-    buildWrapTileNode(row, index) {
-        const result = super.buildWrapTileNode(row, index);
+    buildWrapTileNode(tile) {
+        const result = super.buildWrapTileNode(tile);
 
         result.className = 'cardLib_tile_wrapCut color_wheat';
+
+        if (tile.isSelected) {
+            result.className = result.className + ' cardLib_tile_selected';
+        }
 
         return result;
     }
