@@ -5,6 +5,12 @@ import { TileRender } from './components/Tile';
 
 export class CardRenderHelper extends PioneerRenderMatrix {
     buildWrapTileNode(tile) {
+
+        // Пустая заглушка с размерами.
+        if (!tile?.value) {
+            return this.buildWrapEmptyNode();
+        }
+
         const result = super.buildWrapTileNode(tile);
 
         result.className = 'cardLib_tile_wrapCut color_wheat';
@@ -14,6 +20,14 @@ export class CardRenderHelper extends PioneerRenderMatrix {
         }
 
         return result;
+    }
+
+    buildWrapEmptyNode() {
+        const node = this.getEmptyDiv();
+
+        node.className = 'cardLib_tile_empty';
+
+        return node;
     }
 
     buildDivTileNode(item) {

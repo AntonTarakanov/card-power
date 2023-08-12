@@ -24,6 +24,28 @@ export class Tile extends Card {
             }
         });
     }
+
+    setValueByEntries(entriesList) {
+        entriesList.forEach(keyValue => {
+            const [key, value] = keyValue;
+
+            if (!this.checkImmutableField(key)) {
+                this.setValue(key, value);
+            }
+        });
+    }
+
+    clearValues() {
+        Object.keys(this).forEach(key => {
+            if (!this.checkImmutableField(key)) {
+                this.setValue(key, null);
+            }
+        });
+    }
+
+    checkImmutableField(field) {
+        return IMMUTABLE_FIELDS.includes(field);
+    }
 }
 
 export const FIELDS = {
@@ -31,3 +53,5 @@ export const FIELDS = {
     POSITION: 'position',
     IS_SELECTED: 'isSelected',
 }
+
+export const IMMUTABLE_FIELDS = [FIELDS.POSITION];

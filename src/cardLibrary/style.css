@@ -20,9 +20,11 @@
 
 }
 
+.cardLib_tile_empty,
 .cardLib_tile_wrapCut {
     width: 100px;
     height: 25px;
+    margin: 2px 6px; /* TODO: дублируется */
 }
 
 .cardLib_tile_shirt {
@@ -30,6 +32,10 @@
 }
 
 .cardLib_tile_value {
+
+}
+
+.cardLib_tile_empty {
 
 }
 

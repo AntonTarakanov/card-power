@@ -24,6 +24,10 @@ export class CardState extends PioneerState {
         this.setState(FIELDS.STAGE, stage);
     }
 
+    getSelectedCard() {
+        return this.getStateProperty(FIELDS.SELECTED_CARD);
+    }
+
     setSelectedCard(position) {
         this.setState(FIELDS.SELECTED_CARD, position);
     }
