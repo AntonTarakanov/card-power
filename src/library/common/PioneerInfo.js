@@ -1,5 +1,8 @@
 const DEFAULT_FILED_VALUE = {};
 
+/**
+ * Базовые методы для работы с информацией.
+ */
 export class PioneerInfo {
     constructor(fields, defaultValue) {
         this.initFields(fields, defaultValue);
@@ -21,7 +24,13 @@ export class PioneerInfo {
 
     setValueByEntries(entriesList) {
         entriesList.forEach(keyValue => {
-            this.setValue(keyValue[0], keyValue[1]);
+            const [key, value] = keyValue;
+
+            this.setValue(key, value);
         });
+    }
+
+    overwriteValues(obj) {
+        this.setValueByEntries(Object.entries(obj));
     }
 }

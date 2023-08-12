@@ -152,6 +152,20 @@ export class PioneerMatrix extends Array {
         tile.setValue(field, value);
     }
 
+    getColumnList(positionX) {
+        const result = [];
+
+        this.forEach(row => {
+            const tile = row[positionX];
+
+            if (tile) {
+                result.push(tile);
+            }
+        })
+
+        return result;
+    }
+
     static checkPositionLimitMethod(value, maxLimit) {
         return value >= 0 && value <= maxLimit
     }
