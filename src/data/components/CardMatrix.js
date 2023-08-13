@@ -1,6 +1,7 @@
 import { PioneerMatrix } from '../../library';
 
 import { Tile } from './Tile';
+import { CARD_HANDLER_TYPES } from '../../constants';
 
 /**
  * Данные в виде матрицы.
@@ -9,6 +10,13 @@ import { Tile } from './Tile';
  * Функционал добавления строки/элемента при необходимости.
  */
 export class CardMatrix extends PioneerMatrix {
+    constructor(pioneerConfig, cardConfig) {
+        super(pioneerConfig);
+
+        this.dataHandler = cardConfig.dataHandler;
+    }
+
+
     createMatrixItem(x, y) {
         return new Tile({ x, y });
     }
@@ -57,9 +65,7 @@ export class CardMatrix extends PioneerMatrix {
                 }
             }
 
-            emptyList.forEach(position => {
-                this.addAdditionalTile(position.y, position.x);
-            });
+            emptyList.forEach(position => this.addAdditionalTile(position));
         }
     }
 
@@ -83,12 +89,34 @@ export class CardMatrix extends PioneerMatrix {
         return result;
     }
 
-    addAdditionalTile(i, j, tile = null) {
-        this[i][j] = tile || this.createMatrixItem(j, i);
+    /**
+     * @param {object} position x/y.
+     * @param {object} options - tile, rerender.
+     */
+    addAdditionalTile({ x, y }, options = {}) {
+        this[y][x] = options.tile || this.createMatrixItem(y, x);
+
+        if (options.rerender) {
+            this.dataHandler({
+                type: CARD_HANDLER_TYPES.MATRIX_TILE_CHANGE,
+                tile: this[y][x],
+            });
+        }
     }
 
-    addAdditionalRow(i, row = null) {
-        this[i] = row || this.createEmptyMatrixRow(i);
+    /**
+     * @param {number} i
+     * @param {object} options - row, rerender.
+     */
+    addAdditionalRow(i, options = {}) {
+        this[i] = options.row || this.createEmptyMatrixRow(i);
+
+        if (options.rerender) {
+            this.dataHandler({
+                type: CARD_HANDLER_TYPES.MATRIX_ROW_CHANGE,
+                row: this[i],
+            });
+        }
     }
 
     /**
@@ -101,9 +129,9 @@ export class CardMatrix extends PioneerMatrix {
         movingTile.clearValues();
     }
 
-    pastTileByPosition(tile, newPosition) {
+    /*pastTileByPosition(tile, newPosition) {
         this.getItemWithEmpty();
-    }
+    }*/
 
     /*removeTileByPosition(position) {
         this[y][x] = null;

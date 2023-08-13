@@ -173,6 +173,15 @@ export class PioneerRenderMatrix extends PioneerRenderApp {
         return this.getDiv();
     }
 
+    /**
+     * @param {array} changedList - tile position
+     */
+    rerenderTileList(changedList) {
+        changedList.forEach(data => {
+            this.rerenderTile(data);
+        });
+    }
+
     rerenderTile({ tile, position }) {
         const node = this.buildWrapTileNode(tile);
 

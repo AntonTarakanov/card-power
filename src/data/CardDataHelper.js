@@ -16,6 +16,10 @@ import { FIELDS as TILE_FIELDS } from './components/Tile';
  */
 export class CardDataHelper extends PioneerDataHelper {
 
+    matrixChangeHandler(props) {
+
+    }
+
     initDataState() {
         this.state = new CardState();
     }
@@ -33,6 +37,8 @@ export class CardDataHelper extends PioneerDataHelper {
         return new CardMatrix({
             MAX_X: this.config.MAP_SIZE_X,
             MAX_Y: this.config.MAP_SIZE_Y,
+        }, {
+            dataHandler: this.matrixChangeHandler.bind(this),
         });
     }
 

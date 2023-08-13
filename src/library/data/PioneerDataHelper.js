@@ -108,12 +108,28 @@ export class PioneerDataHelper {
     /**
      * Событие изменения элемента.
      *
-     * @param {object} position - { x, y } .
+     * @param {object | array} props - { x, y } | { x, y }[] .
      */
-    useHandler(position) {
-        const tile = this.getItemByPosition(position);
+    useHandler(props) {
+        if (Array.isArray(props)) {
+            const data = [];
 
-        this.useHandlerWithCustom(BASE_HANDLER_TYPES.ELEMENT_CHANGED, { tile, position });
+            props.forEach(position => {
+                data.push({
+                    tile: this.getItemByPosition(position),
+                    position,
+                });
+            });
+
+            this.useHandlerWithCustom(BASE_HANDLER_TYPES.ELEMENTS_CHANGED, data);
+        } else {
+            const data = {
+                tile: this.getItemByPosition(props),
+                position: props,
+            };
+
+            this.useHandlerWithCustom(BASE_HANDLER_TYPES.ELEMENT_CHANGED, data);
+        }
     }
 
     /**
