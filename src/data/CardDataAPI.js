@@ -1,6 +1,5 @@
 import { CardDataHelper } from './CardDataHelper';
 
-import { FIELDS as TILE_FIELDS } from './components/Tile';
 import { STAGES as STATE_STAGE } from './components/CardState';
 
 /**
@@ -22,12 +21,26 @@ export class CardDataAPI extends CardDataHelper {
 
     doSelectCard(position) {
         this.state.setStage(STATE_STAGE.SELECTED);
-        this.state.setSelectedCard(position);
-        this.matrix.changeTile(position, TILE_FIELDS.IS_SELECTED, true);
+        this.setSelectedCard(position, true);
 
         this.useHandler(position);
     }
 
+    doSelectColumnForMove(position) {
+        const bottomTile = this.getBottomColumnTile(position.x);
+        const movingTile = this.getMovingTile();
+
+        const isAvailable = this.checkAvailableMove(movingTile, bottomTile);
+
+        this.setSelectedCard(movingTile.position, false);
+        this.state.setStage(STATE_STAGE.WAITING);
+
+        if (isAvailable) {
+            this.doTransfer(movingTile, bottomTile);
+        }
+    }
+
+    // get / set =>
 
     getMatrix() {
         return this.matrix;

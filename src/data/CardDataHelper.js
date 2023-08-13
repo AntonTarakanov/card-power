@@ -4,6 +4,7 @@ import { DeckAPI } from './components/DeckAPI';
 import { HistoryData } from './components/HistoryData';
 import { CardMatrix } from './components/CardMatrix';
 import { CardState } from './components/CardState';
+import { FIELDS as TILE_FIELDS } from './components/Tile';
 
 /**
  * Аккумулирует логику matrix и card.
@@ -47,11 +48,51 @@ export class CardDataHelper extends PioneerDataHelper {
             const x = i % this.config.NUMBER_COLUMN_ON_TABLE; // column
             const y = ~~(i / this.config.NUMBER_COLUMN_ON_TABLE); // row
 
-            const matrixTile = this.matrix.getItem({ x, y });
+            const matrixTile = this.matrix.getItemWithEmpty({ x, y });
 
             matrixTile.setValues(cardTile);
 
             i++
         }
+    }
+
+    /**
+     * TODO: возможно перерисовки будут вызываться только тут, тогда перенести их сюда.
+     */
+    setSelectedCard(position, value) {
+        this.state.setSelectedCard(value ? position : {});
+        this.matrix.changeTile(position, TILE_FIELDS.IS_SELECTED, value);
+    }
+
+    getBottomColumnTile(x) {
+        const columnList = this.matrix.getColumnList(x);
+
+        return columnList[columnList.length - 1];
+    }
+
+    getMovingTile() {
+        const position = this.state.getSelectedCard();
+
+        return this.matrix.getItem(position);
+    }
+
+    checkAvailableMove(movingTile, targetTile) {
+        return targetTile.value === movingTile.value + 1;
+    }
+
+    /**
+     * bottomTile - этот элемент не меняется.
+     *
+     * @return {array} изменённые элементы.
+     */
+    doTransfer(movingTile, bottomTile) {
+        const targetPosition = { x: bottomTile.position.x, y: bottomTile.position.y + 1 };
+        const changedList = [ { ...movingTile.position }, targetPosition ];
+
+        this.matrix.doTransfer(movingTile, targetPosition);
+
+        this.useHandler(changedList);
+
+        return changedList;
     }
 }
