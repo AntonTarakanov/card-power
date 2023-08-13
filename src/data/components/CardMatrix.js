@@ -17,8 +17,8 @@ export class CardMatrix extends PioneerMatrix {
     }
 
 
-    createMatrixItem(x, y) {
-        return new Tile({ x, y });
+    createMatrixItem(position) {
+        return new Tile(position);
     }
 
     /**
@@ -94,7 +94,7 @@ export class CardMatrix extends PioneerMatrix {
      * @param {object} options - tile, rerender.
      */
     addAdditionalTile({ x, y }, options = {}) {
-        this[y][x] = options.tile || this.createMatrixItem(y, x);
+        this[y][x] = options.tile || this.createMatrixItem({ x, y });
 
         if (options.rerender) {
             this.dataHandler({

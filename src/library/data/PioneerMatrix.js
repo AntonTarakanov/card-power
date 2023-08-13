@@ -100,17 +100,17 @@ export class PioneerMatrix extends Array {
         return result;
     }
 
-    createEmptyMatrixRow(i) {
+    createEmptyMatrixRow(y) {
         const rowResult = [];
 
         for (let j = 0; j < this.MAX_X; j++) {
-            rowResult.push(this.createMatrixItem(j, i));
+            rowResult.push(this.createMatrixItem({ x: j, y }));
         }
 
         return rowResult;
     }
 
-    createMatrixItem(x, y) {
+    createMatrixItem({ x, y }) {
         const TILE_FIELDS = { X: 'x', Y: 'y' };
         const tile = new PioneerInfo(TILE_FIELDS, null);
 
@@ -167,6 +167,6 @@ export class PioneerMatrix extends Array {
     }
 
     static checkPositionLimitMethod(value, maxLimit) {
-        return value >= 0 && value <= maxLimit
+        return value >= 0 && value <= maxLimit;
     }
 }
