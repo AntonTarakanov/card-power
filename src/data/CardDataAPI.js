@@ -37,6 +37,8 @@ export class CardDataAPI extends CardDataHelper {
 
         if (isAvailable) {
             this.doTransfer(movingTile, bottomTile);
+        } else {
+            this.doCancelSelection(movingTile);
         }
     }
 

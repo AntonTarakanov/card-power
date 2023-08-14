@@ -101,4 +101,8 @@ export class CardDataHelper extends PioneerDataHelper {
 
         return changedList;
     }
+
+    doCancelSelection(tile) {
+        this.useHandler(tile.position);
+    }
 }
