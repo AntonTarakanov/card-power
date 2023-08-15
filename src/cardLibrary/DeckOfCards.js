@@ -1,5 +1,5 @@
 import { Card } from './Card';
-import { CARD_SUITS, STANDARD_CARDS_INFO, NON_STANDARD_CARDS, NON_STANDARD_CARDS_VALUE } from './constants';
+import { CARD_SUITS, STANDARD_CARDS_INFO, NON_STANDARD_CARDS, DEFAULT_NON_STANDARD_CARDS_VALUE } from './constants';
 
 /**
  * Колода карт.
@@ -21,6 +21,7 @@ export class DeckOfCards {
     createConfig(config = {}) {
         const defaultConfig = {
             isFullDeck: true,
+            customNonStandardCardsValue: {},
         }
 
         return {
@@ -38,6 +39,7 @@ export class DeckOfCards {
 
     // TODO: добавить работу с "isFullDeck".
     createCardList(isFullDeck, suit) {
+        const nonStandardCardsValue = this.getNonStandardCardsValue();
         const list = [];
 
         // STANDARD_CARDS
@@ -47,7 +49,7 @@ export class DeckOfCards {
 
         // NON_STANDARD_CARDS
         Object.values(NON_STANDARD_CARDS).forEach(name => {
-            list.push(this.createCard(name, NON_STANDARD_CARDS_VALUE[name], suit));
+            list.push(this.createCard(name, nonStandardCardsValue[name], suit));
         });
 
         return list;
@@ -63,5 +65,12 @@ export class DeckOfCards {
 
     getAllSuitsCard(suit) {
         return this[suit].cards;
+    }
+
+    getNonStandardCardsValue() {
+        return {
+            ...DEFAULT_NON_STANDARD_CARDS_VALUE,
+            ...this.config.customNonStandardCardsValue,
+        };
     }
 }

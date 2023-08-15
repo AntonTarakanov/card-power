@@ -6,6 +6,8 @@ import { CardMatrix } from './components/CardMatrix';
 import { CardState } from './components/CardState';
 import { FIELDS as TILE_FIELDS } from './components/Tile';
 
+import { CARD_HANDLER_TYPES } from '../constants';
+
 /**
  * Аккумулирует логику matrix и card.
  *
@@ -58,13 +60,10 @@ export class CardDataHelper extends PioneerDataHelper {
 
             matrixTile.setValues(cardTile);
 
-            i++
+            i++;
         }
     }
 
-    /**
-     * TODO: возможно перерисовки будут вызываться только тут, тогда перенести их сюда.
-     */
     setSelectedCard(position, value) {
         this.state.setSelectedCard(value ? position : {});
         this.matrix.changeTile(position, TILE_FIELDS.IS_SELECTED, value);
@@ -73,7 +72,7 @@ export class CardDataHelper extends PioneerDataHelper {
     getBottomColumnTile(x) {
         const columnList = this.matrix.getColumnList(x);
 
-        return columnList[columnList.length - 1];
+        return columnList.findLast(tile => tile.value);
     }
 
     getMovingTile() {
@@ -82,6 +81,19 @@ export class CardDataHelper extends PioneerDataHelper {
         return this.matrix.getItem(position);
     }
 
+    /**
+     * Проверка на то что карта может выбрана для перемещения.
+     */
+    checkAvailableSelect({ x, y }) {
+        const columnList = this.matrix.getColumnList(x);
+        const selectColumn = columnList.slice(y - 1);
+
+        return true;
+    }
+
+    /**
+     * Проверка на то что ход может быть совершён для выбранных карт.
+     */
     checkAvailableMove(movingTile, targetTile) {
         return targetTile.value === movingTile.value + 1;
     }
@@ -93,13 +105,13 @@ export class CardDataHelper extends PioneerDataHelper {
      */
     doTransfer(movingTile, bottomTile) {
         const targetPosition = { x: bottomTile.position.x, y: bottomTile.position.y + 1 };
-        const changedList = [ { ...movingTile.position }, targetPosition ];
 
         this.matrix.doTransfer(movingTile, targetPosition);
 
-        this.useHandler(changedList);
-
-        return changedList;
+        // TODO: переработать полностью эти перерисовки.
+        this.useHandlerWithCustom(CARD_HANDLER_TYPES.BEFORE_DO_TRANSFER);
+        this.useHandler(movingTile.position);
+        this.useHandler(targetPosition);
     }
 
     doCancelSelection(tile) {

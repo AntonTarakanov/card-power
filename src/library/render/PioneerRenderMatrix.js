@@ -26,6 +26,24 @@ export class PioneerRenderMatrix extends PioneerRenderApp {
     getAppFieldInstance() {
         const appFieldInstance = super.getAppFieldInstance();
 
+        appFieldInstance.getWrapNode = function() {
+            const rootNode = this.getNode();
+
+            return rootNode.firstChild;
+        }
+
+        appFieldInstance.getRowNode = function(rowIndex) {
+            const wrapNode = this.getWrapNode()
+
+            return wrapNode.childNodes[rowIndex];
+        }
+
+        appFieldInstance.getTileNode = function({ x, y }) {
+            const rowNode = this.getRowNode(y);
+
+            return rowNode.childNodes[x];
+        }
+
         appFieldInstance.rerenderNode = function() {
             console.log('Не реализовано');
         }

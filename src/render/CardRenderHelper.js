@@ -50,4 +50,14 @@ export class CardRenderHelper extends PioneerRenderMatrix {
 
         return wrap;
     }
+
+    addNewRow(row, index) {
+        const matrixWrap = this.getMatrixWrap();
+
+        matrixWrap.append(this.buildRowNode(row, index));
+    }
+
+    getMatrixWrap() {
+        return this.appFieldInstance.getWrapNode();
+    }
 }

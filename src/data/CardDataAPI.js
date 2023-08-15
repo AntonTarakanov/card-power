@@ -20,10 +20,12 @@ export class CardDataAPI extends CardDataHelper {
     }
 
     doSelectCard(position) {
-        this.state.setStage(STATE_STAGE.SELECTED);
-        this.setSelectedCard(position, true);
+        if (this.checkAvailableSelect()) {
+            this.state.setStage(STATE_STAGE.SELECTED);
+            this.setSelectedCard(position, true);
 
-        this.useHandler(position);
+            this.useHandler(position);
+        }
     }
 
     doSelectColumnForMove(position) {

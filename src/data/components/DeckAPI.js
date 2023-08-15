@@ -1,6 +1,7 @@
 import { PioneerInfo, powerUtils } from '../../library';
 
 import { DeckOfCards } from '../../cardLibrary';
+import { NON_STANDARD_CARDS } from '../../cardLibrary/constants';
 
 /**
  * Конкретный состав карт в игре и взаимодействие с ними.
@@ -14,7 +15,11 @@ export class DeckAPI extends PioneerInfo {
         for (let i = 0; i < this.config.NUMBER_OF_DECKS; i++) {
             const deckName = this.createDeckName(i);
 
-            this[deckName] = new DeckOfCards();
+            this[deckName] = new DeckOfCards({
+                customNonStandardCardsValue: {
+                    [NON_STANDARD_CARDS.ACE]: 1,
+                }
+            });
             deckNames.push(deckName);
         }
 

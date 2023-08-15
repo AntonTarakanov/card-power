@@ -1,6 +1,7 @@
 import { CardDataAPI, STATE_STAGE } from './data';
 import { CardRenderAPI } from './render';
 import { BASE_HANDLER_TYPES } from './library';
+import { CARD_HANDLER_TYPES } from './constants';
 
 /**
  * Игра CardPower.
@@ -20,7 +21,7 @@ export class CardPowerGameApp {
         this.cardDataAPI = new CardDataAPI(this.dataHandler.bind(this), configForDataAPI, true);
         this.cardRenderAPI = new CardRenderAPI(this.domHandler.bind(this), {}, true);
 
-        const matrix = this.cardDataAPI.getMatrix();
+        const matrix = this.getMatrix();
 
         this.cardRenderAPI.initRender(matrix);
     }
@@ -34,15 +35,15 @@ export class CardPowerGameApp {
         }
 
         if (type === BASE_HANDLER_TYPES.ELEMENTS_CHANGED) {
-            console.log('data', data);
-
             this.cardRenderAPI.rerenderTileList(data);
+        }
+
+        if (type === CARD_HANDLER_TYPES.BEFORE_DO_TRANSFER) {
+            this.cardRenderAPI.checkEmptyTile(this.getMatrix());
         }
     }
 
     /**
-     * TODO: переименовать в matrix.
-     *
      * Обработка событий с matrix элементов.
      */
     domHandler(event, target) {
@@ -95,8 +96,13 @@ export class CardPowerGameApp {
         this.cardDataAPI.doSelectColumnForMove(position);
     }
 
+    // get / set =>
 
     getStateStage() {
         return this.cardDataAPI.getStateStage();
+    }
+
+    getMatrix() {
+        return this.cardDataAPI.getMatrix();
     }
 }
