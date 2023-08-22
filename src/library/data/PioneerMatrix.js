@@ -163,7 +163,7 @@ export class PioneerMatrix extends Array {
             }
         })
 
-        return result;
+        return result.filter(tile => tile.value);
     }
 
     static checkPositionLimitMethod(value, maxLimit) {
