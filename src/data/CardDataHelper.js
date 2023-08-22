@@ -117,4 +117,10 @@ export class CardDataHelper extends PioneerDataHelper {
     doCancelSelection(tile) {
         this.useHandler(tile.position);
     }
+
+    // get / set =>
+
+    getColumnList(positionX) {
+        return this.matrix.getColumnList(positionX);
+    }
 }
